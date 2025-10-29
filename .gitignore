@@ -1,0 +1,92 @@
+# ----------------------------------------
+# Node & Next.js Standard Ignore Rules
+# ----------------------------------------
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+.pnpm-debug.log
+
+# Local environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.example
+# Build output
+.next/
+out/
+dist/
+build/
+
+# Next.js cache
+.next/cache/
+.vercel/
+.vercel_build_output/
+
+# Logs
+logs
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor folders and settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# TypeScript
+*.tsbuildinfo
+
+# Misc
+coverage/
+*.pem
+*.pid
+*.seed
+*.pid.lock
+
+# Lock & backup
+*.orig
+*.bak
+*.tmp
+
+# Test results
+jest-stare/
+test-output/
+coverage-final.json
+
+# Local exports
+*.local
+
+# ----------------------------------------
+# Custom: GitHub / CI Safety
+# ----------------------------------------
+
+# Prevent leaking secrets accidentally
+*.key
+*.crt
+*.pem
+*.p12
+*.cer
+secrets.*
+apikeys.*
+tokens.*
+
+# Optional: Ignore compiled CSS if using Tailwind CLI or Sass output
+*.css.map
+
+# Optional: Ignore VS Code build cache for Next.js
+.vscode/.next/
