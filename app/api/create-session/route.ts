@@ -24,6 +24,7 @@ export async function POST(request: Request): Promise<Response> {
   let sessionCookie: string | null = null;
   try {
     const openaiApiKey = process.env.OPENAI_API_KEY;
+    console.log("[create-session] OPENAI_API_KEY", openaiApiKey);
     if (!openaiApiKey) {
       return new Response(
         JSON.stringify({
