@@ -2,13 +2,26 @@
 FROM node:20-alpine AS builder
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+
+# --- ADD THESE TWO LINES ---
+# 1. Declare the build-time argument
+ARG NEXT_PUBLIC_CHATKIT_WORKFLOW_ID
+# 2. Set it as an environment variable for the build process
+ENV NEXT_PUBLIC_CHATKIT_WORKFLOW_ID=$NEXT_PUBLIC_CHATKIT_WORKFLOW_ID
+# ---------------------------
+
 WORKDIR /app
 COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
-RUN if [ -f package-lock.json ]; then npm ci --include=dev; \
-    elif [ -f pnpm-lock.yaml ]; then npm i -g pnpm && pnpm i --frozen-lockfile; \
-    elif [ -f yarn.lock ]; then corepack enable && yarn install --frozen-lockfile; \
+RUN if [ -f package-lock.json ]; \
+    then npm ci --include=dev; \
+    elif [ -f pnpm-lock.yaml ]; \
+    then npm i -g pnpm && pnpm i --frozen-lockfile; \
+    elif [ -f yarn.lock ]; \
+    then corepack enable && yarn install --frozen-lockfile; \
     else npm i --include=dev; fi
 COPY . .
+
+# This command will now correctly embed the variable into the app
 RUN npm run build
 # shrink node_modules to prod-only for smaller copy
 RUN npm prune --omit=dev
